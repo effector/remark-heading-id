@@ -22,6 +22,9 @@ devDependencies:
   '@types/jest':
     specifier: ^24.0.9
     version: 24.9.1
+  '@types/mdast':
+    specifier: ^3.0.11
+    version: 3.0.15
   conventional-changelog-cli:
     specifier: ^2.0.12
     version: 2.2.2
@@ -274,6 +277,13 @@ packages:
       jest-diff: 24.9.0
     dev: true
 
+  /@types/mdast@3.0.15:
+    resolution:
+      { integrity: sha512-LnwD+mUEfxWMa1QpDraczIn6k0Ee3SMicuYSSzS6ZYl2gKS09EClnJYGd8Du6rfc5r/GZEk5o1mRb8TaTj03sQ== }
+    dependencies:
+      '@types/unist': 2.0.10
+    dev: true
+
   /@types/minimist@1.2.5:
     resolution:
       { integrity: sha512-hov8bUuiLiyFPGyFPE1lwWhmzYbirOXQNNo40+y3zow8aFVTeyn3VWL0VFFfdNddA8S4Vf0Tc062rzyNr7Paag== }
@@ -314,7 +324,7 @@ packages:
       { integrity: sha512-b3nLFGaGkJ9rzOcuXRfHkZMdjsawuDD0ENL9fzTophtBg8FJHSGbH7daXkEpcwy3v7Xol3pAvsmlYyFhR4pqJw== }
     dependencies:
       '@types/node': 20.11.25
-      '@types/unist': 2.0.10
+      '@types/unist': 3.0.2
       '@types/vfile-message': 2.0.0
     dev: true
 
