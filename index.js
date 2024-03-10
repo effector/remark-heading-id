@@ -4,18 +4,19 @@
  */
 
 const visit = require('unist-util-visit')
-const { setNodeId, getDefaultId } = require('./util')
+const { setNodeId, getDefaultId } = require('./lib')
 
-module.exports = function(options = { defaults: false, uniqueDefaults: true }) {
+module.exports = { remarkHeadingId }
+
+function remarkHeadingId(options = { defaults: false, uniqueDefaults: true }) {
   return function(node) {
-
     const uniqueDefaultIdsCounters = {}
 
     visit(node, 'heading', node => {
       let lastChild = node.children[node.children.length - 1]
       if (lastChild && lastChild.type === 'text') {
         let string = lastChild.value.replace(/ +$/, '')
-        let matched = string.match(/ {#([^]+?)}$/)
+        let matched = string.match(/ \[#([^]+?)\]$/)
 
         if (matched) {
           let id = matched[1]
@@ -31,18 +32,18 @@ module.exports = function(options = { defaults: false, uniqueDefaults: true }) {
 
       if (options.defaults) {
         // If no custom id was found, use default instead
-        let defaultIdCandidate = getDefaultId(node.children);
+        let defaultIdCandidate = getDefaultId(node.children)
         if (options.uniqueDefaults) {
           if (uniqueDefaultIdsCounters[defaultIdCandidate] === undefined) {
             // First time this default id is used: initialize counter
-            uniqueDefaultIdsCounters[defaultIdCandidate] = 0;
+            uniqueDefaultIdsCounters[defaultIdCandidate] = 0
           } else {
             // Id already used: increment counter and append it to defaultIdCandidate
-            uniqueDefaultIdsCounters[defaultIdCandidate]++;
-            defaultIdCandidate += "-" + uniqueDefaultIdsCounters[defaultIdCandidate];
+            uniqueDefaultIdsCounters[defaultIdCandidate]++
+            defaultIdCandidate += '-' + uniqueDefaultIdsCounters[defaultIdCandidate]
           }
         }
-        setNodeId(node, defaultIdCandidate);
+        setNodeId(node, defaultIdCandidate)
       }
     })
   }

@@ -1,13 +1,17 @@
 {
-  "name": "remark-heading-id",
-  "version": "1.0.1",
+  "name": "@effector/remark-heading-id",
+  "version": "2.0.0",
   "main": "index.js",
+  "types": "index.d.ts",
   "description": "The remark plugin for supporting custom heading id also including default id",
   "author": "imcuttle <moyuyc95@gmail.com>",
+  "contributors": [
+    "Sergey Sova <report@sergeysova.com>"
+  ],
   "scripts": {
     "test": "jest",
-    "prepublishOnly": "npm test",
-    "version": "npm run changelog",
+    "prepublishOnly": "pnpm test",
+    "version": "pnpm run changelog",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md"
   },
   "husky": {
@@ -23,13 +27,14 @@
   "keywords": [
     "imcuttle",
     "remark",
+    "effector",
     "heading",
     "id",
     "remark-heading-id",
     "custom"
   ],
   "license": "MIT",
-  "repository": "imcuttle/remark-heading-id",
+  "repository": "effector/remark-heading-id",
   "jest": {
     "testMatch": [
       "**/__test{s,}__/*.(spec|test).{t,j}s{x,}"
@@ -51,10 +56,11 @@
     "pretty-quick": "^1.10.0",
     "rehype-stringify": "^5.0.0",
     "remark": "^10.0.1",
-    "remark-rehype": "^4.0.0"
+    "remark-rehype": "^4.0.0",
+    "unified": "^11.0.4"
   },
   "dependencies": {
-    "unist-util-visit": "^1.4.0",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "unist-util-visit": "^1.4.0"
   }
 }

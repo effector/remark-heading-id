@@ -1,19 +1,18 @@
-# remark-heading-id
+# @effector/remark-heading-id
 
-[![Build status](https://img.shields.io/travis/imcuttle/remark-heading-id/master.svg?style=flat-square)](https://travis-ci.org/imcuttle/remark-heading-id)
-[![Test coverage](https://img.shields.io/codecov/c/github/imcuttle/remark-heading-id.svg?style=flat-square)](https://codecov.io/github/imcuttle/remark-heading-id?branch=master)
-[![NPM version](https://img.shields.io/npm/v/remark-heading-id.svg?style=flat-square)](https://www.npmjs.com/package/remark-heading-id)
-[![NPM Downloads](https://img.shields.io/npm/dm/remark-heading-id.svg?style=flat-square&maxAge=43200)](https://www.npmjs.com/package/remark-heading-id)
-[![Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://prettier.io/)
-[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg?style=flat-square)](https://conventionalcommits.org)
+This is fork of the original [imcuttle/remark-heading-id](https://github.com/imcuttle/remark-heading-id).
 
-> The remark plugin for supporting [custom heading id](https://www.markdownguide.org/extended-syntax/#heading-ids) and
+> The remark plugin cannot support [custom heading id](https://www.markdownguide.org/extended-syntax/#heading-ids) because in [mdx](https://github.com/mdx-js/mdx) syntax like `{#hello}` is parsed like JSX substitutions.
 > Default Id
+
+```bash
+npm add @effector/remark-heading-id
+```
 
 ### Custom Heading Input
 
 ```markdown
-### My Great Heading {#custom-id}
+### My Great Heading [#custom-id]
 ```
 
 ### Custom Heading Output
@@ -24,9 +23,11 @@
 
 ### API
 
-This package exports no identifiers. The default export is `remarkHeaderId`.
+```js
+import { remarkHeadingId } from '@effector/remark-heading-id';
 
-`unified().use(remarkHeadingId[, options])`
+unified().use(remarkHeadingId[, options])
+```
 
 #### options
 
@@ -39,7 +40,7 @@ Whether to add default ids based on the title text (boolean, default: false).
 #### options.uniqueDefaults
 
 Whether to ensure that the default ids created by options.defaults are unique (boolean, default: true).
-Only relevant when options.defaults = true.
+Only relevant when `options.defaults == true`.
 Example:
 
 ```markdown
@@ -56,7 +57,7 @@ Example:
 ### argument
 ```
 
-Will generate this output when options.defaults = true and options.uniqueDefaults = true:
+Will generate this output when `options.defaults == true` and `options.uniqueDefaults == true`:
 
 ```html
 <h2 id="heading">heading</h2>
@@ -67,7 +68,7 @@ Will generate this output when options.defaults = true and options.uniqueDefault
 <h3 id="argument-1">argument</h3>
 ```
 
-Instead of this output, which is generated when options.defaults = true and options.uniqueDefaults = false:
+Instead of this output, which is generated when `options.defaults == true` and `options.uniqueDefaults == false`:
 
 ```html
 <h2 id="heading">heading</h2>
@@ -79,7 +80,7 @@ Instead of this output, which is generated when options.defaults = true and opti
 ```
 
 The difference being that the last output contains duplicate ids in the generated html, which are avoided using
-options.uniqueDefaults = true.
+`options.uniqueDefaults = true`.
 
 ##### Default Heading Input
 
@@ -96,11 +97,11 @@ options.uniqueDefaults = true.
 ## Contributing
 
 - Fork it!
-- Create your new branch:  
+- Create your new branch:
   `git checkout -b feature-new` or `git checkout -b fix-which-bug`
 - Start your magic work now
 - Make sure npm test passes
-- Commit your changes:  
+- Commit your changes:
   `git commit -am 'feat: some description (close #123)'` or `git commit -am 'fix: some description (fix #123)'`
 - Push to the branch: `git push`
 - Submit a pull request :)
@@ -109,6 +110,9 @@ options.uniqueDefaults = true.
 
 This library is written and maintained by imcuttle, <a href="mailto:moyuyc95@gmail.com">moyuyc95@gmail.com</a>.
 
+This library is forked and maintained by Effector Core Team and [Sergey Sova](https://github.com/sergeysova).
+
 ## License
 
 MIT - [imcuttle](https://github.com/imcuttle) 🐟
+MIT - 2024 [effector](https://github.com/effector)
