@@ -9,14 +9,14 @@ const { setNodeId, getDefaultId } = require('./lib')
 module.exports = { remarkHeadingId }
 
 function remarkHeadingId(options = { defaults: false, uniqueDefaults: true }) {
-  return function(node) {
+  return function(root) {
     const uniqueDefaultIdsCounters = {}
 
-    visit(node, 'heading', node => {
+    visit(root, 'heading', node => {
       let lastChild = node.children[node.children.length - 1]
       if (lastChild && lastChild.type === 'text') {
         let string = lastChild.value.replace(/ +$/, '')
-        let matched = string.match(/ \[#([^]+?)\]$/)
+        let matched = string.match(/ \(#([^]+?)\)$/)
 
         if (matched) {
           let id = matched[1]

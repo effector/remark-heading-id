@@ -12,7 +12,7 @@ npm add @effector/remark-heading-id
 ### Custom Heading Input
 
 ```markdown
-### My Great Heading [#custom-id]
+### My Great Heading (#custom-id)
 ```
 
 ### Custom Heading Output

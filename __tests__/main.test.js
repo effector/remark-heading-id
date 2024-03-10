@@ -6,8 +6,8 @@
 const remark = require('remark')
 const stringify = require('remark-rehype')
 const html = require('rehype-stringify')
-const remarkHeadingId = require('../')
-const { formatDefaultId } = require('../util')
+const { remarkHeadingId } = require('../')
+const { formatDefaultId } = require('../lib')
 
 describe('remarkHeadingId', function() {
   it('custom header', function() {
@@ -17,9 +17,9 @@ describe('remarkHeadingId', function() {
       })
       .use(remarkHeadingId)
       .use(stringify)
-      .use(html).processSync(`# cus head1 {#idd-id}
-# cus head2 {#idd id}
-# cus head3 {#中文 id}`)
+      .use(html).processSync(`# cus head1 (#idd-id)
+# cus head2 (#idd id)
+# cus head3 (#中文 id)`)
 
     expect(contents).toMatchInlineSnapshot(`
 "<h1 id=\\"idd-id\\">cus head1</h1>
@@ -47,7 +47,7 @@ describe('remarkHeadingId', function() {
       .use(remarkHeadingId)
       .use(stringify)
       .use(html).processSync(`# head
-# cus head1 {#idd-id}`)
+# cus head1 (#idd-id)`)
 
     expect(contents).toMatchInlineSnapshot(`
 "<h1>head</h1>
@@ -63,7 +63,7 @@ describe('remarkHeadingId', function() {
       .use(remarkHeadingId, { defaults: true })
       .use(stringify)
       .use(html).processSync(`# head
-# cus head1 {#idd-id}`)
+# cus head1 (#idd-id)`)
 
     expect(contents).toMatchInlineSnapshot(`
 "<h1 id=\\"head\\">head</h1>
@@ -106,9 +106,9 @@ describe('remarkHeadingId', function() {
 # My Great Heading
 ## head **headb**
 ## head ~~headc~~
-# cus \`head1\` {#idd-id}
-## cus **head2** {#idd id}
-## cus ~~head2~~  {#idd id}`)
+# cus \`head1\` (#idd-id)
+## cus **head2** (#idd id)
+## cus ~~head2~~  (#idd id)`)
 
     expect(contents).toMatchInlineSnapshot(`
 "<h1 id=\\"head-heada\\">head <code>heada</code></h1>
